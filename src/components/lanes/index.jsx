@@ -75,11 +75,15 @@ const Lane = ({ title, tickets, users, grouping }) => {
   };
 
   const getUserIcon = () => {
-    // If you want to add user icon logic
     const user = users.find(u => u.id === sortedTickets[0]?.userId);
     return user ? (
       <div className="user-avatar">
-        {/* Add your user avatar logic here */}
+        <img
+              src={`https://ui-avatars.com/api/?name=${user.name}&background=random`}
+              alt={user.name}
+              title={user.name}
+            />
+             <span className={`status-indicator ${user.available ? 'online' : 'offline'}`} />
       </div>
     ) : null;
   };

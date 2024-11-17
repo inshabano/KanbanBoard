@@ -46,9 +46,7 @@ const Card = ({ ticket, user, grouping }) => {
               alt={user.name}
               title={user.name}
             />
-            <span
-              className={`status-indicator ${user.available ? "available" : ""}`}
-            />
+            <span className={`status-indicator ${user.available ? 'online' : 'offline'}`} />
           </div>
         }
         
