@@ -4,17 +4,16 @@ import { MoreHorizontal, Circle, AlertCircle, Clock, CheckCircle2 } from 'lucide
 import './index.css';
 
 const Lane = ({ title, tickets, users, grouping }) => {
-  // Sort tickets based on grouping
+
   const sortedTickets = React.useMemo(() => {
     const sortedArray = [...tickets];
 
     switch (grouping) {
       case 'priority':
-        // Sort by priority (highest to lowest)
+       
         return sortedArray.sort((a, b) => b.priority - a.priority);
         
       case 'user':
-        // Sort by user name alphabetically
         return sortedArray.sort((a, b) => {
           const userA = users.find(u => u.id === a.userId)?.name || '';
           const userB = users.find(u => u.id === b.userId)?.name || '';
@@ -22,7 +21,6 @@ const Lane = ({ title, tickets, users, grouping }) => {
         });
         
       case 'status':
-        // Define status order
         const statusOrder = {
           'backlog': 0,
           'todo': 1,
@@ -57,7 +55,6 @@ const Lane = ({ title, tickets, users, grouping }) => {
   };
 
   const getPriorityIcon = () => {
-    // Using sortedTickets instead of tickets
     const priorities = sortedTickets.map(ticket => ticket.priority);
     switch (priorities[0]) {
    

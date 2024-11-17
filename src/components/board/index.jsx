@@ -18,7 +18,6 @@ const Board = ({ tickets, users, grouping, sorting }) => {
     const entries = Object.entries(groupedTickets);
 
     if (grouping === 'priority') {
-      // Define priority order
       const priorityOrder = {
         "Urgent": 1,
         "High": 2,
@@ -33,7 +32,6 @@ const Board = ({ tickets, users, grouping, sorting }) => {
     }
 
     if (grouping === 'status') {
-      // Define status order
       const statusOrder = {
         "Backlog": 0,
         "Todo": 1,
@@ -47,7 +45,7 @@ const Board = ({ tickets, users, grouping, sorting }) => {
       );
     }
 
-    // For users and any other grouping, sort alphabetically
+   
     return entries.sort(([a], [b]) => a.localeCompare(b));
   };
 
@@ -76,7 +74,6 @@ const Board = ({ tickets, users, grouping, sorting }) => {
       }, {});
     }
 
-    // Sort tickets within each lane
     Object.keys(groupedTickets).forEach((key) => {
       groupedTickets[key].sort((a, b) => {
         if (sorting === "priority") {

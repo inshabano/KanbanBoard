@@ -96,9 +96,9 @@
   }
   
   .status-indicator.online {
-    background-color: #22c55e; /* green-500 */
+    background-color: #22c55e; 
   }
   
   .status-indicator.offline {
-    background-color: #9ca3af; /* gray-400 */
+    background-color: #9ca3af;
   }
