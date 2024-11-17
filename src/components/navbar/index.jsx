@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Settings, ChevronDown } from 'lucide-react';
+import { VscSettings } from "react-icons/vsc";
 import './index.css';
 
 const Navbar = ({ grouping, sorting, onGroupingChange, onSortingChange }) => {
@@ -8,7 +9,7 @@ const Navbar = ({ grouping, sorting, onGroupingChange, onSortingChange }) => {
   return (
     <nav className="navbar">
       <div className="display-button" onClick={() => setIsOpen(!isOpen)}>
-        <Settings size={16} />
+        <VscSettings size={16} />
         <span>Display</span>
         <ChevronDown size={16} />
       </div>

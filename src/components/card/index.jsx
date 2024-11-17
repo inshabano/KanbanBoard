@@ -1,5 +1,6 @@
 import React from 'react';
-import { AlertCircle, Circle, CheckCircle2, Clock } from 'lucide-react';
+import { AlertCircle, Circle, CheckCircle, Clock } from 'lucide-react';
+import { GiNetworkBars, TbBrightnessFilled } from "react-icons/gi";
 import './index.css';
 
 const Card = ({ ticket, user }) => {
@@ -10,9 +11,9 @@ const Card = ({ ticket, user }) => {
       case 'todo':
         return <Circle size={14} />;
       case 'in progress':
-        return <AlertCircle size={14} color="#f1c950" />;
+        return <TbBrightnessFilled size={14} color="#f1c950" />;
       case 'done':
-        return <CheckCircle2 size={14} color="#5cb85c" />;
+        return <CheckCircle size={14} color="#5cb85c" />;
       default:
         return null;
     }
@@ -43,7 +44,7 @@ const Card = ({ ticket, user }) => {
       <div className="card-footer">
         {getPriorityIcon()}
         <div className="tag">
-          <span>●</span>
+          <span><GiNetworkBars />   </span>
           <span>{ticket.tag}</span>
         </div>
       </div>

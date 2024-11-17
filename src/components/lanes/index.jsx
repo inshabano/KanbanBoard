@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from '../card';
-import { MoreHorizontal, Circle, AlertCircle, Clock, CheckCircle2 } from 'lucide-react';
+import { MoreHorizontal, Circle, AlertCircle, Clock, CircleCheck } from 'lucide-react';
+import { TbBrightnessFilled } from "react-icons/tb";
 import './index.css';
 
 const Lane = ({ title, tickets, users, grouping }) => {
@@ -11,9 +12,9 @@ const Lane = ({ title, tickets, users, grouping }) => {
       case 'todo':
         return <Circle size={16} />;
       case 'in progress':
-        return <AlertCircle size={16} color="#f1c950" />;
+        return <TbBrightnessFilled  size={16} color="#f1c950" />;
       case 'done':
-        return <CheckCircle2 size={16} color="#5cb85c" />;
+        return <CircleCheck size={16} color="#5cb85c" />;
       default:
         return null;
     }
