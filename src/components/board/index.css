@@ -1,0 +1,26 @@
+
+.board {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    overflow-x: auto;
+    height: calc(100vh - 60px);
+    align-items: flex-start;
+  }
+  
+  .board::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .board::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  .board::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+  }
+  
+  .board::-webkit-scrollbar-thumb:hover {
+    background: #999;
+  }

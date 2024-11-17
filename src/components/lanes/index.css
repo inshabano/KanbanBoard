@@ -1,0 +1,67 @@
+.lane {
+    min-width: 300px;
+    background-color: #f4f5f8;
+    border-radius: 8px;
+  }
+  
+  .lane-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    color: #333;
+  }
+  
+  .lane-header-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .lane-header-left h3 {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+  }
+  
+  .ticket-count {
+    color: #666;
+    font-size: 14px;
+  }
+  
+  .lane-header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .add-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #666;
+    padding: 0 4px;
+  }
+  
+  .lane-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+  }
+  
+  .lane-content::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .lane-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  .lane-content::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 2px;
+  }
