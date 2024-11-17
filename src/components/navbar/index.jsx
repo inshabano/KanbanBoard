@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Settings, ChevronDown } from 'lucide-react';
+
 import './index.css';
 
 const Navbar = ({ grouping, sorting, onGroupingChange, onSortingChange }) => {
@@ -8,13 +8,13 @@ const Navbar = ({ grouping, sorting, onGroupingChange, onSortingChange }) => {
   return (
     <nav className="navbar">
       <div className="display-button" onClick={() => setIsOpen(!isOpen)}>
-        <Settings size={16} />
+        <img src="Display.svg" alt="" />
         <span>Display</span>
-        <ChevronDown size={16} />
+        <img src="down.svg" alt="down arrow" />
       </div>
       
       {isOpen && (
-        <div className="dropdown-menu">
+        <div className="dropdown-menu" onMouseLeave={() => setIsOpen(!isOpen)} >
           <div className="dropdown-item">
             <span>Grouping</span>
             <select

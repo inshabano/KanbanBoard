@@ -4,29 +4,90 @@ import { MoreHorizontal, Circle, AlertCircle, Clock, CheckCircle2 } from 'lucide
 import './index.css';
 
 const Lane = ({ title, tickets, users, grouping }) => {
+  // Sort tickets based on grouping
+  const sortedTickets = React.useMemo(() => {
+    const sortedArray = [...tickets];
+
+    switch (grouping) {
+      case 'priority':
+        // Sort by priority (highest to lowest)
+        return sortedArray.sort((a, b) => b.priority - a.priority);
+        
+      case 'user':
+        // Sort by user name alphabetically
+        return sortedArray.sort((a, b) => {
+          const userA = users.find(u => u.id === a.userId)?.name || '';
+          const userB = users.find(u => u.id === b.userId)?.name || '';
+          return userA.localeCompare(userB);
+        });
+        
+      case 'status':
+        // Define status order
+        const statusOrder = {
+          'backlog': 0,
+          'todo': 1,
+          'in progress': 2,
+          'done': 3,
+          'canceled': 4
+        };
+        return sortedArray.sort((a, b) => {
+          const statusA = statusOrder[a.status.toLowerCase()] || 0;
+          const statusB = statusOrder[b.status.toLowerCase()] || 0;
+          return statusA - statusB;
+        });
+        
+      default:
+        return sortedArray;
+    }
+  }, [tickets, users, grouping]);
+
   const getStatusIcon = () => {
     switch (title.toLowerCase()) {
       case 'backlog':
-        return <Clock size={16} />;
+        return <img src="Backlog.svg" alt="" />;
       case 'todo':
         return <Circle size={16} />;
       case 'in progress':
-        return <AlertCircle size={16} color="#f1c950" />;
+        return <img src="in-progress.svg" alt="" />;
       case 'done':
-        return <CheckCircle2 size={16} color="#5cb85c" />;
+        return <img src="Done.svg" alt="" />;  
       default:
-        return null;
+        return <img src="Cancelled.svg" alt="" />;
     }
   };
 
   const getPriorityIcon = () => {
-    // Add priority icons based on your design
-    return null;
+    // Using sortedTickets instead of tickets
+    const priorities = sortedTickets.map(ticket => ticket.priority);
+    switch (priorities[0]) {
+   
+      case 1:
+        return <img src="lowPriority.svg" alt="Low Priority" />;
+      case 2:
+        return <img src="mediumPriority.svg" alt="Low Priority" />;
+      case 3:
+        return <img src="highPriority.svg" alt="Medium Priority" />;
+      case 4:
+        return <img src="UrgentPriority.svg" alt="High Priority" />;
+      default:
+        return <img src="No-priority.svg" alt="No Priority" />;
+    }
+  };
+
+  const getUserIcon = () => {
+    // If you want to add user icon logic
+    const user = users.find(u => u.id === sortedTickets[0]?.userId);
+    return user ? (
+      <div className="user-avatar">
+        {/* Add your user avatar logic here */}
+      </div>
+    ) : null;
   };
 
   const getIcon = () => {
     if (grouping === 'status') return getStatusIcon();
     if (grouping === 'priority') return getPriorityIcon();
+    if (grouping === 'user') return getUserIcon();
     return null;
   };
 
@@ -36,7 +97,7 @@ const Lane = ({ title, tickets, users, grouping }) => {
         <div className="lane-header-left">
           {getIcon()}
           <h3>{title}</h3>
-          <span className="ticket-count">{tickets.length}</span>
+          <span className="ticket-count">{sortedTickets.length}</span>
         </div>
         <div className="lane-header-right">
           <button className="add-button">+</button>
@@ -44,11 +105,12 @@ const Lane = ({ title, tickets, users, grouping }) => {
         </div>
       </div>
       <div className="lane-content">
-        {tickets.map(ticket => (
+        {sortedTickets.map(ticket => (
           <Card
             key={ticket.id}
             ticket={ticket}
             user={users.find(u => u.id === ticket.userId)}
+            grouping={grouping}
           />
         ))}
       </div>

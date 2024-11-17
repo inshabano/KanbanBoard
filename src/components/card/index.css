@@ -8,13 +8,24 @@
   .card-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     margin-bottom: 8px;
   }
-  
+  .card-title{
+    display: flex;
+    gap: 6px;
+  }
+  .status-icon{
+    align-self: center;
+  }
+ 
   .ticket-id {
     color: #6b6f76;
     font-size: 14px;
+  }
+
+  .card-footer{
+    display: flex;
+    gap: 10px;
   }
   
   .user-avatar {
