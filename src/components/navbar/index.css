@@ -25,13 +25,14 @@
     position: absolute;
     top: 100%;
     left: 20px;
-    background-color: white;
+    background-color: #dae2e3;
     border: 1px solid #e0e0e0;
     border-radius: 4px;
     padding: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(173, 63, 63, 0.1);
     z-index: 1000;
     min-width: 230px;
+    
   }
   
   .dropdown-item {
@@ -39,14 +40,16 @@
     justify-content: space-between;
     align-items: center;
     margin: 8px 0;
-    color: #666;
+    color: #4a4848;
   }
   
   .dropdown-item select {
     padding: 4px 8px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid #f6efef;
+    background-color: white;
     border-radius: 4px;
     margin-left: 12px;
     min-width: 120px;
     cursor: pointer;
+    color: black;
   }
