@@ -64,7 +64,7 @@ const Card = ({ ticket, user, grouping }) => {
         <div className="priority-icon">{getPriorityIcon()}</div>
         }
         <div className="tag">
-          <span>● </span>
+          <span className="dot">● </span>
           <span>{ticket.tag}</span>
         </div>
       </div>

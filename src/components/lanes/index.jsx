@@ -1,6 +1,5 @@
 import React from 'react';
 import Card from '../card';
-import { MoreHorizontal, Circle, AlertCircle, Clock, CheckCircle2 } from 'lucide-react';
 import './index.css';
 
 const Lane = ({ title, tickets, users, grouping }) => {
@@ -44,7 +43,7 @@ const Lane = ({ title, tickets, users, grouping }) => {
       case 'backlog':
         return <img src="Backlog.svg" alt="" />;
       case 'todo':
-        return <Circle size={16} />;
+        return <img src="To-do.svg" alt="" />
       case 'in progress':
         return <img src="in-progress.svg" alt="" />;
       case 'done':
@@ -101,8 +100,10 @@ const Lane = ({ title, tickets, users, grouping }) => {
           <span className="ticket-count">{sortedTickets.length}</span>
         </div>
         <div className="lane-header-right">
-          <button className="add-button">+</button>
-          <MoreHorizontal size={16} />
+          <button className="add-button">
+          <img src="add.svg" alt="add" />
+          </button>
+         <img src="3 dot menu.svg" alt="" />
         </div>
       </div>
       <div className="lane-content">
