@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import './index.css';
 
-const Navbar = ({ grouping, sorting, onGroupingChange, onSortingChange }) => {
+const Navbar = ({ group, order, onGroupChange, onOrderChange }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -18,8 +18,8 @@ const Navbar = ({ grouping, sorting, onGroupingChange, onSortingChange }) => {
           <div className="dropdown-item">
             <span>Grouping</span>
             <select
-              value={grouping}
-              onChange={(e) => onGroupingChange(e.target.value)}
+              value={group}
+              onChange={(e) => onGroupChange(e.target.value)}
             >
               <option value="status">Status</option>
               <option value="user">User</option>
@@ -30,8 +30,8 @@ const Navbar = ({ grouping, sorting, onGroupingChange, onSortingChange }) => {
           <div className="dropdown-item">
             <span>Ordering</span>
             <select
-              value={sorting}
-              onChange={(e) => onSortingChange(e.target.value)}
+              value={order}
+              onChange={(e) => onOrderChange(e.target.value)}
             >
               <option value="priority">Priority</option>
               <option value="title">Title</option>

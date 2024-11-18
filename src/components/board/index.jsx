@@ -2,7 +2,7 @@ import React from "react";
 import Lane from "../lanes";
 import "./index.css";
 
-const Board = ({ tickets, users, grouping, sorting }) => {
+const Board = ({ tickets, users, group, order }) => {
   const getPriorityName = (priority) => {
     const priorities = {
       0: "No priority",
@@ -14,10 +14,10 @@ const Board = ({ tickets, users, grouping, sorting }) => {
     return priorities[priority];
   };
 
-  const sortLanes = (groupedTickets) => {
+  const orderLanes = (groupedTickets) => {
     const entries = Object.entries(groupedTickets);
 
-    if (grouping === 'priority') {
+    if (group === 'priority') {
       const priorityOrder = {
         "Urgent": 1,
         "High": 2,
@@ -31,7 +31,7 @@ const Board = ({ tickets, users, grouping, sorting }) => {
       );
     }
 
-    if (grouping === 'status') {
+    if (group === 'status') {
       const statusOrder = {
         "Backlog": 0,
         "Todo": 1,
@@ -52,20 +52,20 @@ const Board = ({ tickets, users, grouping, sorting }) => {
   const organizeTickets = () => {
     let groupedTickets = {};
 
-    if (grouping === "status") {
+    if (group === "status") {
       groupedTickets = tickets.reduce((acc, ticket) => {
         if (!acc[ticket.status]) acc[ticket.status] = [];
         acc[ticket.status].push(ticket);
         return acc;
       }, {});
-    } else if (grouping === "user") {
+    } else if (group === "user") {
       groupedTickets = tickets.reduce((acc, ticket) => {
         const user = users.find((u) => u.id === ticket.userId);
         if (!acc[user.name]) acc[user.name] = [];
         acc[user.name].push(ticket);
         return acc;
       }, {});
-    } else if (grouping === "priority") {
+    } else if (group === "priority") {
       groupedTickets = tickets.reduce((acc, ticket) => {
         const priority = getPriorityName(ticket.priority);
         if (!acc[priority]) acc[priority] = [];
@@ -76,7 +76,7 @@ const Board = ({ tickets, users, grouping, sorting }) => {
 
     Object.keys(groupedTickets).forEach((key) => {
       groupedTickets[key].sort((a, b) => {
-        if (sorting === "priority") {
+        if (order === "priority") {
           return b.priority - a.priority;
         }
         return a.title.localeCompare(b.title);
@@ -87,17 +87,17 @@ const Board = ({ tickets, users, grouping, sorting }) => {
   };
 
   const groupedTickets = organizeTickets();
-  const sortedLanes = sortLanes(groupedTickets);
+  const orderedLanes = orderLanes(groupedTickets);
 
   return (
     <div className="board">
-      {sortedLanes.map(([groupName, tickets]) => (
+      {orderedLanes.map(([groupName, tickets]) => (
         <Lane
           key={groupName}
           title={groupName}
           tickets={tickets}
           users={users}
-          grouping={grouping}
+          group={group}
         />
       ))}
     </div>

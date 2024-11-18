@@ -2,18 +2,18 @@ import React from 'react';
 import Card from '../card';
 import './index.css';
 
-const Lane = ({ title, tickets, users, grouping }) => {
+const Lane = ({ title, tickets, users, group }) => {
 
-  const sortedTickets = React.useMemo(() => {
-    const sortedArray = [...tickets];
+  const orderedTickets = React.useMemo(() => {
+    const orderedArray = [...tickets];
 
-    switch (grouping) {
+    switch (group) {
       case 'priority':
        
-        return sortedArray.sort((a, b) => b.priority - a.priority);
+        return orderedArray.sort((a, b) => b.priority - a.priority);
         
       case 'user':
-        return sortedArray.sort((a, b) => {
+        return orderedArray.sort((a, b) => {
           const userA = users.find(u => u.id === a.userId)?.name || '';
           const userB = users.find(u => u.id === b.userId)?.name || '';
           return userA.localeCompare(userB);
@@ -27,16 +27,16 @@ const Lane = ({ title, tickets, users, grouping }) => {
           'done': 3,
           'canceled': 4
         };
-        return sortedArray.sort((a, b) => {
+        return orderedArray.sort((a, b) => {
           const statusA = statusOrder[a.status.toLowerCase()] || 0;
           const statusB = statusOrder[b.status.toLowerCase()] || 0;
           return statusA - statusB;
         });
         
       default:
-        return sortedArray;
+        return orderedArray;
     }
-  }, [tickets, users, grouping]);
+  }, [tickets, users, group]);
 
   const getStatusIcon = () => {
     switch (title.toLowerCase()) {
@@ -54,7 +54,7 @@ const Lane = ({ title, tickets, users, grouping }) => {
   };
 
   const getPriorityIcon = () => {
-    const priorities = sortedTickets.map(ticket => ticket.priority);
+    const priorities = orderedTickets.map(ticket => ticket.priority);
     switch (priorities[0]) {
    
       case 1:
@@ -71,7 +71,7 @@ const Lane = ({ title, tickets, users, grouping }) => {
   };
 
   const getUserIcon = () => {
-    const user = users.find(u => u.id === sortedTickets[0]?.userId);
+    const user = users.find(u => u.id === orderedTickets[0]?.userId);
     return user ? (
       <div className="user-avatar">
         <img
@@ -85,9 +85,9 @@ const Lane = ({ title, tickets, users, grouping }) => {
   };
 
   const getIcon = () => {
-    if (grouping === 'status') return getStatusIcon();
-    if (grouping === 'priority') return getPriorityIcon();
-    if (grouping === 'user') return getUserIcon();
+    if (group === 'status') return getStatusIcon();
+    if (group === 'priority') return getPriorityIcon();
+    if (group === 'user') return getUserIcon();
     return null;
   };
 
@@ -97,7 +97,7 @@ const Lane = ({ title, tickets, users, grouping }) => {
         <div className="lane-header-left">
           {getIcon()}
           <h3>{title}</h3>
-          <span className="ticket-count">{sortedTickets.length}</span>
+          <span className="ticket-count">{orderedTickets.length}</span>
         </div>
         <div className="lane-header-right">
           <button className="add-button">
@@ -107,12 +107,12 @@ const Lane = ({ title, tickets, users, grouping }) => {
         </div>
       </div>
       <div className="lane-content">
-        {sortedTickets.map(ticket => (
+        {orderedTickets.map(ticket => (
           <Card
             key={ticket.id}
             ticket={ticket}
             user={users.find(u => u.id === ticket.userId)}
-            grouping={grouping}
+            group={group}
           />
         ))}
       </div>

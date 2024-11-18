@@ -7,8 +7,8 @@ import './App.css';
 function App() {
   const [tickets, setTickets] = useState([]);
   const [users, setUsers] = useState([]);
-  const [grouping, setGrouping] = useState(localStorage.getItem('grouping') || 'status');
-  const [sorting, setSorting] = useState(localStorage.getItem('sorting') || 'priority');
+  const [group, setGroup] = useState(localStorage.getItem('group') || 'status');
+  const [order, setOrder] = useState(localStorage.getItem('order') || 'priority');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -30,14 +30,14 @@ function App() {
     fetchData();
   }, []);
 
-  const handleGroupingChange = (value) => {
-    setGrouping(value);
+  const handleGroupChange = (value) => {
+    setGroup(value);
     localStorage.setItem('grouping', value);
   };
 
-  const handleSortingChange = (value) => {
-    setSorting(value);
-    localStorage.setItem('sorting', value);
+  const handleOrderChange = (value) => {
+    setOrder(value);
+    localStorage.setItem('order', value);
   };
 
   if (loading) {
@@ -47,16 +47,16 @@ function App() {
   return (
     <div className="app">
       <Navbar
-        grouping={grouping}
-        sorting={sorting}
-        onGroupingChange={handleGroupingChange}
-        onSortingChange={handleSortingChange}
+        group={group}
+        order={order}
+        onGroupChange={handleGroupChange}
+        onOrderChange={handleOrderChange}
       />
       <Board
         tickets={tickets}
         users={users}
-        grouping={grouping}
-        sorting={sorting}
+        group={group}
+        order={order}
       />
     </div>
   );

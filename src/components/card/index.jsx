@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.css";
 
-const Card = ({ ticket, user, grouping }) => {
+const Card = ({ ticket, user, group }) => {
   const getStatusIcon = () => {
     switch (ticket.status.toLowerCase()) {
       case "backlog":
@@ -39,7 +39,7 @@ const Card = ({ ticket, user, grouping }) => {
     <div className="card">
       <div className="card-header">
         <span className="ticket-id">{ticket.id}</span>
-        {grouping !== "user" && 
+        {group !== "user" && 
             <div className="user-avatar">
             <img
               src={`https://ui-avatars.com/api/?name=${user.name}&background=random`}
@@ -53,14 +53,14 @@ const Card = ({ ticket, user, grouping }) => {
       </div>
       <div className="card-title">
         {
-            grouping !== "status" &&  <div className="status-icon">{getStatusIcon()}</div>
+            group !== "status" &&  <div className="status-icon">{getStatusIcon()}</div>
         }
        
 
         <p className="ticket-title">{ticket.title}</p>
       </div>
       <div className="card-footer">
-        {grouping !== "priority" && 
+        {group !== "priority" && 
         <div className="priority-icon">{getPriorityIcon()}</div>
         }
         <div className="tag">
