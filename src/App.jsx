@@ -1,27 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import Navbar from './components/navbar';
-import Board from './components/board';
-import { fetchTickets, fetchUsers } from './API/api';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import Navbar from "./components/navbar";
+import Board from "./components/board";
+import { fetchTickets, fetchUsers } from "./API/api";
+import "./App.css";
 
-function App() {
+const App = () => {
   const [tickets, setTickets] = useState([]);
   const [users, setUsers] = useState([]);
-  const [group, setGroup] = useState(localStorage.getItem('group') || 'status');
-  const [order, setOrder] = useState(localStorage.getItem('order') || 'priority');
+  const [group, setGroup] = useState(() => {
+    return localStorage.getItem("grouping") || "status";
+  });
+  const [order, setOrder] = useState(() => {
+    return localStorage.getItem("ordering") || "priority";
+  });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
         const [ticketsData, usersData] = await Promise.all([
           fetchTickets(),
-          fetchUsers()
+          fetchUsers(),
         ]);
         setTickets(ticketsData);
         setUsers(usersData);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       } finally {
         setLoading(false);
       }
@@ -30,36 +35,41 @@ function App() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem("grouping", group);
+  }, [group]);
+
+  useEffect(() => {
+    localStorage.setItem("ordering", order);
+  }, [order]);
+
   const handleGroupChange = (value) => {
     setGroup(value);
-    localStorage.setItem('grouping', value);
   };
 
   const handleOrderChange = (value) => {
     setOrder(value);
-    localStorage.setItem('order', value);
   };
 
   if (loading) {
-    return <div className="loading">Loading...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-pulse text-lg">Loading...</div>
+      </div>
+    );
   }
 
   return (
-    <div className="app">
+    <div className="min-h-screen bg-gray-50">
       <Navbar
         group={group}
         order={order}
         onGroupChange={handleGroupChange}
         onOrderChange={handleOrderChange}
       />
-      <Board
-        tickets={tickets}
-        users={users}
-        group={group}
-        order={order}
-      />
+      <Board tickets={tickets} users={users} group={group} order={order} />
     </div>
   );
-}
+};
 
 export default App;
